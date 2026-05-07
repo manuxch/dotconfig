@@ -14,5 +14,6 @@ end
 fish_add_path $HOME/.local/bin
 fish_add_path /opt/ovito-basic-3.12.4-x86_64/bin
 
+set -gx GOOGLE_API_KEY AIzaSyBFv_Of3RPOCKpteewBNtVI4_sr4PmokJ0
 zoxide init fish | source
 source ~/.config/fish/aliases.fish
