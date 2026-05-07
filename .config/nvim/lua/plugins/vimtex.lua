@@ -3,7 +3,7 @@
 return {
   "lervag/vimtex",
   lazy = false, -- evita el lazy-loading para habilitar inverse search
-  config = function()
+  init = function() -- ← CAMBIA config POR init
     -- Visor PDF
     vim.g.vimtex_view_method = "zathura_simple"
     -- Alternativa: vim.g.vimtex_view_method = "sioyek"
