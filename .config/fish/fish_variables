@@ -38,4 +38,4 @@ SETUVAR fish_pager_color_selected_background:\x2dr
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/opt/ovito\x2dbasic\x2d3\x2e12\x2e4\x2dx86_64/bin\x1e/home/manuel/Tools/yazi/target/release
+SETUVAR fish_user_paths:/home/manuel/\x2elocal/bin\x1e/opt/ovito\x2dbasic\x2d3\x2e12\x2e4\x2dx86_64/bin\x1e/home/manuel/Tools/yazi/target/release
