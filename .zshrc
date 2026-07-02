@@ -1,104 +1,107 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
-
-# Path to your Oh My Zsh installation.
+# ==============================================================================
+# 1. CONFIGURACIÓN CENTRAL DE OH MY ZSH & PATHS
+# ==============================================================================
 export ZSH="$HOME/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time Oh My Zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+# Comportamiento y actualizaciones
+ENABLE_CORRECTION="true"
+COMPLETION_WAITING_DOTS="true"
+HIST_STAMPS="dd.mm.yyyy"
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# PLUGINS (Definidos estrictamente ANTES de cargar Oh My Zsh)
+# Nota: 'zsh-syntax-highlighting' siempre debe ser el último de la lista.
+plugins=(
+    git
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+)
 
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
-
+# Inicializar Oh My Zsh
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+# ==============================================================================
+# 2. VARIABLES DE ENTORNO & EXPORTS (PATH)
+# ==============================================================================
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:/opt/ovito-basic-3.12.4-x86_64/bin"
 
-# export MANPATH="/usr/local/man:$MANPATH"
+# Editor preferido según el entorno
+if [[ -n $SSH_CONNECTION ]]; then
+   export EDITOR='vim'
+else
+   export EDITOR='nvim'
+fi
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+# ==============================================================================
+# 3. CONFIGURACIÓN DEL HISTORIAL (Optimizada para Zsh)
+# ==============================================================================
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt append_history
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_expire_dups_first
+setopt share_history # Comparte el historial entre pestañas activas en tiempo real
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='nvim'
-# fi
+# ==============================================================================
+# 4. CONFIGURACIÓN DE FZF (Integración nativa y limpia)
+# ==============================================================================
+if command -v fzf &> /dev/null; then
+    source <(fzf --zsh)
+fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch $(uname -m)"
+# ==============================================================================
+# 5. ALIASES PERSONALIZADOS (Organizados por categoría)
+# ==============================================================================
 
-# Set personal aliases, overriding those provided by Oh My Zsh libs,
-# plugins, and themes. Aliases can be placed here, though Oh My Zsh
-# users are encouraged to define aliases within a top-level file in
-# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
-# - $ZSH_CUSTOM/aliases.zsh
-# - $ZSH_CUSTOM/macos.zsh
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# --- Conexiones e Investigación (IFLYSIB / UTN / SLURM / VPN) ---
+alias iy='ssh -p22 manuel@10.100.0.145'
+alias sutn='ssh mcarlevaro@10.2.2.4'
+alias slurm='ssh mcarlevaro@10.100.0.202'
+alias vpn='cd /home/manuel/tools/mcarlevaro && sudo openvpn client.conf'
+alias utn='cd /home/manuel/tools/mcarlevaro && sudo openvpn mcarlevaro.ovpn'
+alias cam='nohup mpv rtsp://admin:1234qwer@192.168.1.37 &>/dev/null &'
+
+# --- Reemplazos Modernos (lsd / Gestión de archivos) ---
+alias ls='lsd'
+alias l='ls -ah'
+alias la='ls -afh'            # Vista compacta mostrando ocultos
+alias ll='ls -alh'            # Vista de lista detallada con ocultos
+alias l1='ls -1h'
+alias lf='ls -fh'
+alias labc='ls -- -p -lap'     # Orden alfabético
+alias lf="ls -lh | egrep -v '^d'"  # Solo archivos
+alias ldir="ls -l | egrep '^d'"    # Solo directorios
+alias latr="ls -latrh"         # Ordenados por antigüedad (reverso)
+alias sl=ls
+
+# --- Navegación y Utilidades básicas ---
+alias bd='cd "$oldpwd"'
+alias c='clear'
+alias da='date "+%y-%m-%d %a %t %z"'
+alias meteo='curl wttr.in'
+alias rmd='/bin/rm --recursive --force --verbose'
+
+# --- Búsquedas y Procesos (Filtros rápidos) ---
+alias h="history | grep "
+alias p="ps aux | grep "
+alias f="find . | grep "
+alias topcpu="/bin/ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10"
+alias checkcommand="type -t"
+
+# --- Inspección de Almacenamiento e Información del Sistema ---
+alias countfiles="for t in files links directories; do echo \`find . -type \${t:0:1} | wc -l\` \$t; done 2> /dev/null"
+alias ipview="netstat -anpl | grep :80 | awk {'print \$5'} | cut -d\":\" -f1 | sort | uniq -c | sort -n | sed -e 's/^ *//' -e 's/ *\$//'"
+alias diskspace="du -s | sort -n -r | more"
+alias folders='du -h --max-depth=1'
+alias folderssort='find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn'
+alias tree='tree -cahf --dirsfirst'
+alias treed='tree -cafd'
+alias mountedinfo='df -ht'
+
+# --- Administración del Sistema (Debian Testing) ---
+alias rebootsafe='sudo shutdown -r now'
+alias rebootforce='sudo shutdown -r -n now'
+alias aptupgd='sudo apt update && sudo apt dist-upgrade -v && sudo apt autoremove'
