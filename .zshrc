@@ -105,3 +105,6 @@ alias mountedinfo='df -ht'
 alias rebootsafe='sudo shutdown -r now'
 alias rebootforce='sudo shutdown -r -n now'
 alias aptupgd='sudo apt update && sudo apt dist-upgrade -v && sudo apt autoremove'
+
+# --- zoxide 
+eval "$(zoxide init zsh)"
