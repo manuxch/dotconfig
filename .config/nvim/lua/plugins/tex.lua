@@ -4,7 +4,7 @@ return {
     lazy = false, -- VimTeX se encarga de su propio lazy-loading por tipo de archivo
     init = function()
       -- Configurar el visor de PDF por defecto
-      vim.g.vimtex_view_method = "zathura"
+      vim.g.vimtex_view_method = "zathura_simple"
 
       -- Opcional: Si preferís que compile a PDF automáticamente al guardar el archivo .tex
       vim.g.vimtex_compiler_latexmk = {
