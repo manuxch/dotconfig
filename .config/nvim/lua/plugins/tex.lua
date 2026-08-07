@@ -11,6 +11,13 @@ return {
         continuous = 1,
         callback = 1,
       }
+      -- Tratar entorno 'shell' como verbatim (minted)
+      vim.g.vimtex_syntax_custom_envs = {
+        shell = { verbatim = true },
+      }
+
+      -- Evitar indentación automática dentro de 'shell'
+      vim.g.vimtex_indent_ignored_envs = { "shell" }
     end,
   },
 }
