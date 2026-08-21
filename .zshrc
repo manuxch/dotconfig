@@ -58,7 +58,7 @@ fi
 
 # --- Conexiones e Investigación (IFLYSIB / UTN / SLURM / VPN) ---
 alias iy='ssh -p22 manuel@10.100.0.145'
-alias sutn='ssh mcarlevaro@10.2.2.4'
+alias sutn='ssh mcarlevaro@10.2.2.67'
 alias slurm='ssh mcarlevaro@10.100.0.202'
 alias vpn='cd /home/manuel/Tools/mcarlevaro && sudo openvpn client.conf'
 alias utn='cd /home/manuel/tools/mcarlevaro && sudo openvpn mcarlevaro.ovpn'
