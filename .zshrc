@@ -108,3 +108,6 @@ alias aptupgd='sudo apt update && sudo apt dist-upgrade -v && sudo apt autoremov
 
 # --- zoxide 
 eval "$(zoxide init zsh)"
+
+# Created by `pipx` on 2026-09-04 21:55:54
+export PATH="$PATH:/home/manuel/.local/bin"
