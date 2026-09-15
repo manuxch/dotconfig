@@ -1,0 +1,16 @@
+# Configuración local de latexindent (usada por texlab desde nvim)
+
+# Entornos cuyo contenido latexindent no modifica
+verbatimEnvironments:
+  verbatim: 1
+  Verbatim: 1
+  lstlisting: 1
+  minted: 1
+  shell: 1
+
+# Indentación con dos espacios en lugar de tab
+defaultIndent: "  "
+
+# No indentar el cuerpo de document
+noAdditionalIndent:
+  document: 1
