@@ -116,3 +116,4 @@ export PATH="$PATH:/home/manuel/.local/bin"
 export PATH=/home/manuel/.opencode/bin:$PATH
 export TASKRC="$HOME/Nextcloud2/Taskwarrior/taskrc"
 export TASKDATA="$HOME/Nextcloud2/Taskwarrior"
+alias tt="taskwarrior-tui"
