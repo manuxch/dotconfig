@@ -114,6 +114,5 @@ export PATH="$PATH:/home/manuel/.local/bin"
 
 # opencode
 export PATH=/home/manuel/.opencode/bin:$PATH
-export TASKRC="$HOME/Nextcloud/Taskwarrior/.taskrc"
-export TASKDATA="$HOME/Nextcloud/Taskwarrior"
-export TASKDATA="$HOME/Nextcloud/Taskwarrior"
+export TASKRC="$HOME/Nextcloud2/Taskwarrior/taskrc"
+export TASKDATA="$HOME/Nextcloud2/Taskwarrior"
